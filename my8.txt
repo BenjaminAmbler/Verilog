@@ -1,0 +1,19 @@
+module my8(clk,rst,c,up,ce,load,cin,cout,b,s00, s01, s02, s03, s04, s05, s06,s10, s11, s12, s13, s14, s15, s16);
+  
+  input clk,rst,up,ce,load;
+  input  cin;  
+  input [7:0]b;
+  output [7:0]c;
+  output s10, s11, s12, s13, s14, s15, s16,s00, s01, s02, s03, s04, s05, s06;
+  output cout;
+  
+  wire mycarry;
+  
+  four_bit_counter my3to0(clk, rst, c[3:0], up, ce, load, cin, mycarry,b[3:0]);
+  four_bit_counter my7to4(clk, rst, c[7:4], up, ce, load, mycarry, cout,b[7:4]);
+  
+  //module seven_segment_display(in, s0, s1, s2, s3, s4, s5, s6 );
+  seven_segment_display Sev30(c[3:0], s00, s01, s02, s03, s04, s05, s06);
+  seven_segment_display Sev74(c[7:4], s10, s11, s12, s13, s14, s15, s16);
+
+endmodule

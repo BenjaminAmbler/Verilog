@@ -1,0 +1,27 @@
+/* Second "State Machine" that detects the messages: 101110 or 110110
+Created by Ben Ambler 4-15-15 */
+
+
+module myboom2(clk, rst, val, launch, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10);
+  input clk, rst, val;
+    output reg s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+    output launch;
+    assign launch = s10|s7;
+    always@(posedge clk)
+      if (rst)
+        {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10}<=10'b1000000000;
+    else
+      begin
+        s1<=s1&val|s5&val;
+        s2<=s1&~val|s7&~val|s2&~val|s6&~val|s9&~val|s3&~val|s8&~val;
+        s3<=s2&val;
+        s4<=s3&val|s7&val;
+        s5<=s4&val|s10&val;
+        s6<=s5&~val;
+        s7<=s6&val;
+        s8<=s4&~val|s10&~val;
+        s9<=s8&val;
+        s10<=s9&val;
+      end
+endmodule  
+    

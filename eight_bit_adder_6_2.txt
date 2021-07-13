@@ -1,0 +1,16 @@
+
+/* 8-bit Adder Module with 3 inputs: A,B, and Carry in, and two outputs: Sum and CarryOut.
+ Ben Ambler 2-21-2015 */
+
+
+module eight_bit_adder (A[7:0], B[7:0], cin, cout, S[7:0]);
+
+input A[7:0], B[7:0], cin;
+output cout, S[7:0];
+
+{8{FA}};
+assign A[0].ci=cin;  //this is for the first carry in, which is 0.
+assign S[7:0]=A[7:0]+B[7:0];  //main part of the add function for each individual adder
+assign cout=s[7].co;    //make the module carry so it can be plugged into other modules
+
+endmodule

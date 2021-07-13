@@ -1,0 +1,20 @@
+/* Lab 5 Verilog #4 5x7 display HELO
+These lights are laid out to be 5 columns (a,b,c,d,e) and 7 rows (1,2,3,4,5,6,7)
+
+Benjamin Ambler
+February 18th 2015
+*/
+module lab_five (h, e, l, o, ls, rs, top, mid, bot);
+  input h, e, l, o;
+  output ls, rs, top, mid, bot;
+  assign ls = a1 & a2 & a3 & a4 & a5 & a6 & a7; // This is for all lights on the left side of the display
+  assign rs = e1 & e2 & e3 & e4 & e5 & e6 & e7; // This is for all lights on the right side of the display
+  assign top = a1 & b1 & c1 & d1 & e1;  //This is for the top row of lights
+  assign mid = b4 & c4 & d4;  //This is the middle row except for the last light on the right and first light on left
+  assign bot = a7 & b7 & c7 & d7 & e7;  //Entire bottom row of lights
+  h = (ls & mid & rs);
+  e = (top & mid & bot);
+  l = (ls & bot);
+  o = (ls & bot & rs & top);
+  
+endmodule

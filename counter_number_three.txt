@@ -1,0 +1,38 @@
+
+
+
+module counter_number_three(clk,rst,c,up,ce);
+  
+  input clk,rst,up,ce;
+  
+  output reg [3:0]c;
+  
+  always@(posedge clk)
+  
+begin
+ if(rst)
+  begin
+   c<=4'B0;
+  end
+
+ else
+  if(ce)
+   begin
+    if(up)
+   begin
+    c<=c+4'B1;
+  end
+  else
+    begin
+     c<=c-4'B1;
+    end
+   end
+  else
+   begin 
+    c<=c;
+  end
+end
+
+endmodule      
+  
+  

@@ -1,0 +1,111 @@
+
+
+/* Meat Machine
+Ben Ambler, Spring 2015 */
+
+
+module meat(clk, rst, M, E, A, T, launch, s01, s02, s03, s04, s05, s06, s07, s08, s09, s10, s11, s12, s13, s14, 
+s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29);
+
+input clk, rst, M, E, A, T;
+output launch;
+output reg s01, s02, s03, s04, s05, s06, s07, s08, s09, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20,
+s21, s22, s23, s24, s25, s26, s27, s28, s29;
+assign launch = s03 | s05 | s22 | s23 | s24 | s13 | s11 | s15 | 
+                s16 | s08 | s19 | s20 | s21 | s28 | s27 | s29; 
+
+/* launch if any of my 16 words (or acronyms) are lit up.
+The following words (or acronyms or abbreviations) should light up:
+MEAT, ME, MEET, TEAM, EAT, ATE, TEE, TEA, MA, MATE, MAT, TAME, TATE,
+TAT, EET, ATM. */
+
+always @ (posedge clk)
+if (rst)
+{s01, s02, s03, s04, s05, s06, s07, s08, s09, s10, s11, s12, s13, s14, s15, s16, s17, s18, 
+s19, s20, s21, s22, s23, s24, s25, s26, s27,
+s28, s29} <= 29'b10000000000000000000000000000;
+
+else 
+  begin
+    
+s01 <= 1'b0;
+
+s02 <= s01 & M | s02 & M | s03 & M | s04 & M |
+       s05 & M | s06 & M | s08 & M | s09 & M |
+       s10 & M | s11 & M | s12 & M | s13 & M |
+       s14 & M | s15 & M | s16 & M | s17 & M |
+       s18 & M | s20 & M | s21 & M | s22 & M |
+       s23 & M | s24 & M | s26 & M | s27 & M |
+       s28 & M | s29 & M;
+
+s03 <= s02 & E;
+
+s04 <= s03 & A;
+
+s05 <= s04 & T;
+
+s06 <= s01 & A | s04 & A | s05 & A | s06 & A | 
+       s07 & A | s08 & A | s10 & A | s11 & A |
+       s12 & A | s13 & A | s14 & A | s15 & A |
+       s16 & A | s19 & A | s20 & A | s21 & A |
+       s22 & A | s23 & A | s24 & A | s25 & A |
+       s26 & A | s27 & A | s28 & A | s29 & A;
+
+s07 <= s06 & T;
+
+s08 <= s07 & E;
+
+s09 <= s01 & E | s04 & E | s05 & E | s06 & E | 
+       s08 & E | s10 & E | s11 & E | s12 & E |
+       s13 & E | s14 & E | s15 & E | s16 & E |
+       s19 & E | s20 & E | s21 & E | s22 & E | 
+       s24 & E | s25 & E | s27 & E | s29 & E;
+
+s10 <= s09 & A;
+
+s11 <= s10 & T;
+
+s12 <= s03 & E;
+
+s13 <= s12 & T;
+
+s14 <= s09 & E;
+
+s15 <= s14 & T;
+
+s16 <= s07 & M;
+
+s17 <= s01 & T | s02 & T | s03 & T | s05 & T |
+       s07 & T | s08 & T | s09 & T | s11 & T |
+       s13 & T | s15 & T | s16 & T | s17 & T |
+       s18 & T | s19 & T | s20 & T | s21 & T |
+       s23 & T | s24 & T | s26 & T | s27 & T |
+       s28 & T | s29 & T;
+
+s18 <= s17 & E;
+
+s19 <= s18 & A;
+
+s20 <= s19 & M;
+
+s21 <= s18 & E;
+
+s22 <= s02 & A;
+
+s23 <= s22 & T;
+
+s24 <= s23 & E;
+
+s25 <= s17 & A;
+
+s26 <= s25 & M;
+
+s27 <= s26 & E;
+
+s28 <= s25 & T;
+
+s29 <= s28 & E;
+
+  end
+
+endmodule

@@ -1,0 +1,36 @@
+
+/*Seven segment display Ben Ambler 3-30-2015
+*/
+
+module seven_segment_display(in, s0, s1, s2, s3, s4, s5, s6 );
+ 
+input [3:0]in;
+output s0, s1, s2, s3, s4, s5, s6 ;
+
+wire n0 =in==4'b0000;
+wire n1 =in==4'b0001;
+wire n2 =in==4'b0010;
+wire n3 =in==4'b0011;
+wire n4 =in==4'b0100;
+wire n5 =in==4'b0101;
+wire n6 =in==4'b0110;
+wire n7 =in==4'b0111;
+wire n8 =in==4'b1000;
+wire n9 =in==4'b1001;
+wire nA =in==4'b1010;
+wire nB =in==4'b1011;
+wire nC =in==4'b1100;
+wire nD =in==4'b1101;
+wire nE =in==4'b1110;
+wire nF =in==4'b1111;
+
+assign s0=~(n0|n2|n3|n5|n6|n7|n8|n9|nA|nC|nE|nF); //top segment
+assign s1=~(n0|n1|n2|n3|n4|n7|n8|n9|nA|nD);          //top right segment
+assign s2=~(n0|n1|n3|n4|n5|n6|n7|n8|n9|nA|nB|nD);    //bottom right segment
+assign s3=~(n0|n2|n3|n5|n6|n8|nB|nC|nD|nE);          //bottom segment
+assign s4=~(n0|n2|n6|n8|nA|nB|nC|nD|nE|nF);          //bottom left segment
+assign s5=~(n0|n4|n5|n6|n8|n9|nA|nB|nC|nE|nF);       //top left segment
+assign s6=~(n2|n3|n4|n5|n6|n8|n9|nA|nB|nD|nE|nF);       //middle segment
+
+endmodule
+

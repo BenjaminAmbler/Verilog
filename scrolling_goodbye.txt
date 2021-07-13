@@ -1,0 +1,57 @@
+/* Ben Ambler 4-6-15
+This is a scrolling "GOODBYE"
+ (on a 7 segment display)
+*/
+
+module scrolling_goodbye(clk, rst, 
+s00, s01, s02, s03, s04, s05, s06,
+s10, s11, s12, s13, s14, s15, s16,
+s20, s21, s22, s23, s24, s25, s26,
+s30, s31, s32, s33, s34, s35, s36,
+s40, s41, s42, s43, s44, s45, s46,
+s50, s51, s52, s53, s54, s55, s56,
+s60, s61, s62, s63, s64, s65, s66,
+s70, s71, s72, s73, s74, s75, s76);
+
+
+input clk, rst;
+output s00, s01, s02, s03, s04, s05, s06;
+output s10, s11, s12, s13, s14, s15, s16;
+output s20, s21, s22, s23, s24, s25, s26;
+output s30, s31, s32, s33, s34, s35, s36;
+output s40, s41, s42, s43, s44, s45, s46;
+output s50, s51, s52, s53, s54, s55, s56;
+output s60, s61, s62, s63, s64, s65, s66;
+output s70, s71, s72, s73, s74, s75, s76;
+
+reg [7:0]b0;
+reg [7:0]b1;
+reg [7:0]b2;
+
+always@(posedge clk)
+if(rst)
+ begin
+  b0<= 8'b00001001;
+  b1<= 8'b00000111;
+  b2<= 8'b00011111;
+ end
+else
+ begin
+  b0<={b0[6:0], b0[7]};
+  b1<={b1[6:0], b1[7]};
+  b2<={b2[6:0], b2[7]};
+end 
+
+
+//hello_seven_segment_display(in, ON, s0, s1, s2, s3, s4, s5, s6);
+
+hello_seven_segment_display d0({b1[0], b0[0]}, b2[0], s00, s01, s02, s03, s04, s05, s06);
+hello_seven_segment_display d1({b1[1], b0[1]}, b2[1], s10, s11, s12, s13, s14, s15, s16);
+hello_seven_segment_display d2({b1[2], b0[2]}, b2[2], s20, s21, s22, s23, s24, s25, s26);
+hello_seven_segment_display d3({b1[3], b0[3]}, b2[3], s30, s31, s32, s33, s34, s35, s36);
+hello_seven_segment_display d4({b1[4], b0[4]}, b2[4], s40, s41, s42, s43, s44, s45, s46);
+hello_seven_segment_display d5({b1[5], b0[5]}, b2[5], s50, s51, s52, s53, s54, s55, s56);
+hello_seven_segment_display d6({b1[6], b0[6]}, b2[6], s60, s61, s62, s63, s64, s65, s66);
+hello_seven_segment_display d7({b1[7], b0[7]}, b2[7], s70, s71, s72, s73, s74, s75, s76);
+
+endmodule

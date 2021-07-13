@@ -1,0 +1,25 @@
+
+
+
+module mycnt(clk,rst,c);
+  
+  input clk,rst;
+  
+  output reg [3:0]c;
+  
+  always@(posedge clk)
+  
+  begin 
+    if(rst)
+      begin
+        c<=4'B0;
+  end
+  
+  else
+    begin
+      c<=c+4'B1;
+    end
+  end
+
+endmodule      
+  

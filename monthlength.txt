@@ -1,0 +1,24 @@
+/* MonthLength Module
+Benjamin Ambler
+February 9th 2015
+*/
+
+module month_length (leap, p1, p2, p4, p8, d28, d29, d30, d31);  
+  
+/*p1 menas binary 1's, 
+p2 means binary 2's, p4 means binary 4's, p8 means binary 8's*/
+
+ input leap, p1, p2, p4, p8; /*this is for our four binary number inputs, 
+  and leap year as an input as well.*/
+  
+  output d28, d29, d30, d31; //these are our four outputs
+  wire feb = p2 & ~p8 & ~p4 & ~p1; // This is for month 2, Februrary (0010).
+  assign d28 = feb & ~leap;  // This for when we are NOT having a leap year.
+  assign d29 = feb & leap;  // This is for when we ARE having a LEAP year.
+  assign d30 = (p1 == p4) & ~(p2 == p1);  /* This is my dad showing me how to
+                                             recognize patterns in my truth table.*/
+  assign d31 = (~d30) & (~feb);  //this is what's left over for all the other months.
+  
+endmodule
+  
+  

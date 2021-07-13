@@ -1,0 +1,29 @@
+/* 16 Segment Display for 0-9
+Benjamin Ambler
+February 18th 2015
+*/
+module lab_5_3 (zero, one, two, three, four, five, six, seven, eight, nine,
+ a1, a2, f, h, i, j, b, g1, g2, e, m, l, k, c, d1, d2);
+
+  input zero, one, two, three, four, five, six, seven, eight, nine;
+
+  output a1, a2, f, h, i, j, b, g1, g2, e, m, l, k, c, d1, d2;  //These are the segments for the display
+
+  assign a1 = (zero|two|three|five|six|seven|eight|nine); // This is for the top left segment of the display
+  assign a2 = a1;
+  assign f = (zero|four|five|six|eight|nine);//This is for upper left edge of display
+  assign h = (~zero|~one|~two|~three|~four|~five|~six|~seven|~eight|~nine);
+  assign i = h;
+  assign j = (one|seven);
+  assign b = (zero|one|two|three|four|eight|nine);
+  assign g1 = (two|four|five|six|eight|nine);
+  assign g2 = (two|three|four|five|six|eight|nine);
+  assign e = (zero|two|six|eight);
+  assign m = h;
+  assign l = (seven);
+  assign k = h;
+  assign c = (zero|one|three|four|five|six|eight|nine);
+  assign d1 = (zero|two|three|five|six|eight);
+  assign d2 = d1;
+    
+endmodule

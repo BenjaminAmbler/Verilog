@@ -1,0 +1,26 @@
+
+/* 8-bit Adder Module with 3 inputs: A,B, and Carry in, and two outputs: Sum and CarryOut.
+ Ben Ambler 2-21-2015 */
+
+
+module eight_bit_adder(A1, A2, A3, A4, A5, A6, A7, A8, B1, B2, B3, B4, B5, B6, B7, B8, 
+Y1, Y2, Y3, Y4, Y5, Y6, Y7, Y8, Cout);
+
+input A1, A2, A3, A4, A5, A6, A7, A8;
+input B1, B2, B3, B4, B5, B6, B7, B8;
+output Y1, Y2, Y3, Y4, Y5, Y6, Y7, Y8, Cout;
+
+
+
+FA a1s   (  A1,  B1,  1'B0,  Y1,   A2s.ci);
+FA a2s   (  A2,  B2,  A3.ci, Y2,   A3s.ci);
+FA a3s   (  A3,  B3,  A4.ci, Y3,   A4s.ci);
+FA a8s   (  A4,  B4,  A5.ci, Y4,   A5s.ci);
+FA a16s  (  A5,  B5,  A6.ci, Y5,   A6s.ci);
+FA a32s  (  A6,  B6,  A7.ci, Y6,   A7s.ci);
+FA a64s  (  A7,  B7,  A8.ci, Y7,   A8s.ci);
+FA a128s (  A8,  B8,  Y8,            Cout);
+
+assign s256o = c128o;
+
+endmodule

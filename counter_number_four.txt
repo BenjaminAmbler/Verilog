@@ -1,0 +1,39 @@
+
+
+
+module counter_number_four(clk,rst,c,up,ce,load,cin);
+  
+  input clk,rst,up,ce,load;
+  input [3:0]cin;  
+  output reg [3:0]c;
+  
+  always@(posedge clk)
+  
+begin
+ if(rst)
+  begin
+   c<=4'b0;
+  end
+ else
+  if (load)
+   begin
+    c<=cin;
+   end
+  else
+   if(ce)
+    if(up)
+     begin
+      c<=c+4'b1;
+     end  
+    else
+     begin
+      c<=c-4'B1;
+     end
+    else //ce
+     begin 
+      c<=c;
+     end
+end
+
+endmodule      
+  

@@ -1,0 +1,19 @@
+odule VietV (Van, Thuy, Thao, AllV, MostV, SomeV, NoV);
+
+input Van, Thuy, Thao;
+
+output AllV, MostV, SomeV, NoV;
+
+assign AllV = Van & Thuy & Thao; //this is if all are there
+  
+assign NoV = (~Van) & (~Thuy) & (~Thao); //this is when none are here
+  
+
+assign MostV = (Thuy & Thao)  //most are here
+  | (Van & Thao)
+  | (Van & Thuy);
+  
+assign SomeV = Van | Thuy | Thao;  //some are here
+ 
+
+endmodule

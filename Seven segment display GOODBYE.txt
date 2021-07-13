@@ -1,0 +1,27 @@
+/* Ben Ambler 4-6-15 
+Seven segment display GOODBYE
+*/
+
+module goodbye_seven_segment_display(in, ON, s0, s1, s2, s3, s4, s5, s6);
+ 
+input ON;
+input [2:0]in;
+output s0, s1, s2, s3, s4, s5, s6;
+
+wire G =in==3'b001;
+wire O =in==3'b011;
+wire D =in==3'b010;
+wire B =in==3'b101;
+wire Y =in==3'b100;
+wire E =in==3'b111;
+
+assign s0=~((G|O|B|E) & ON);     //top segment
+assign s1=~((O|D|B|Y) & ON);     //top right segment
+assign s2=~((G|O|D|B|Y) & ON);   //bottom right segment
+assign s3=~((G|O|D|B|Y|E) & ON); //bottom segment
+assign s4=~((G|O|D|B|E) & ON);   //bottom left segment
+assign s5=~((G|O|B|Y|E) & ON);   //top left segment
+assign s6=~((G|D|B|Y|E) & ON);   //middle segment
+
+endmodule
+

@@ -1,0 +1,16 @@
+module lab5_1 (0,1,blank,lt,lb,rt,rb,t,m,b);
+
+input (zero, one, blank);
+output (lt,lb,rt,rb,t,m,b);
+assign lt=(~blank);
+assign lb=lt;
+assign rt=((~zero)&(~one)
+ | (zero)&(one))&lt;
+assign rb=rt;
+assign t=one&~zero&~blank;
+assign m=~zero&blank;
+assign b=((~zero&one)
+ | (zero&~one)
+ | (zero&one)&~blank);
+
+endmodule
